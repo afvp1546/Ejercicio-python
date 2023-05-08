@@ -1,5 +1,5 @@
 def menu():
-    """Función que muestra el menú y llama a las funciones correspondientes según la opción elegida"""
+    """Menú del sistema"""
     while True:
         print("Menú principal\n")
         print("1. Calculadora")
@@ -17,9 +17,9 @@ def menu():
         elif opcion == "3":
             convertir_masa()
         elif opcion == "4":
-            area_perimetro_circulo()
+            circulo()
         elif opcion == "5":
-            ingresar_notas()
+            notas()
         elif opcion == "6":
             numeros_primos()
         elif opcion == "7":
@@ -30,7 +30,7 @@ def menu():
         else:
             print("Opción inválida")
 
-
+# Función que describe los valores basicos de una calculadora
 def calculadora():
     """Función que muestra un menú con operaciones básicas de una calculadora"""
     print("Calculadora\n")
@@ -59,23 +59,71 @@ def calculadora():
         print("Opción inválida")
 
 
+# Función para convertir metros a km y ft
 def convertir_distancia():
-    """Función que convierte una distancia dada en millas a kilómetros"""
-    print("Convertir distancia\n")
-    millas = float(input("Ingrese la distancia en millas: "))
-    kilometros = millas * 1.60934
-    print(millas, "millas equivalen a", kilometros, "kilómetros")
+    print("Bienvenido al conversor de distancia")
+    distancia = float(input("Ingrese la distancia en metros: "))
+    opcion = input("Ingrese la unidad a la que desea convertir (km, ft): ")
+    if opcion == "km":
+        resultado = distancia / 1000
+    elif opcion == "ft":
+        resultado = distancia / 0.3048
+    else:
+        print("Unidad no válida")
+        return
+    print("El resultado de la conversión es: ", resultado, opcion)
 
-
+# Función para convertir gramos a kg o lb
 def convertir_masa():
-    """Función que convierte una masa dada en libras a kilogramos"""
-    print("Convertir masa\n")
-    libras = float(input("Ingrese la masa en libras: "))
-    kilogramos = libras * 0.453592
-    print(libras, "libras equivalen a", kilogramos, "kilogramos")
+    print("Bienvenido al conversor de masa")
+    masa = float(input("Ingrese la masa en gramos: "))
+    opcion = input("Ingrese la unidad a la que desea convertir (kg, lb): ")
+    if opcion == "kg":
+        resultado = masa / 1000
+    elif opcion == "lb":
+        resultado = masa / 453.592
+    else:
+        print("Unidad no válida")
+        return
+    print("El resultado de la conversión es: ", resultado, opcion)
 
-
-def area_perimetro_circulo():
-    """Función que calcula el área y el perímetro de un círculo dado su radio"""
-    print("Área y perímetro de un círculo\n")
+# Función para calcular el perimetro y area de un circulo
+def circulo():
+    print("Bienvenido al cálculo de área y perímetro de un círculo")
     radio = float(input("Ingrese el radio del círculo: "))
+    area = 3.1416 * radio ** 2
+    perimetro = 2 * 3.1416 * radio
+    print("El área del círculo es: ", area)
+    print("El perímetro del círculo es: ", perimetro)
+
+# Función para la opción 5: ingresar n notas de una materia
+def notas():
+    print("Bienvenido al ingreso de notas")
+    n = int(input("Ingrese la cantidad de notas a ingresar: "))
+    suma = 0
+    for i in range(n):
+        nota = float(input("Ingrese la nota {}: ".format(i+1)))
+        suma += nota
+    promedio = suma / n
+    print("El promedio es: ", promedio)
+    if promedio >= 3:
+        print(f"Felicitaciones, paso la materia con {promedio}")
+    else:
+        print(f"Lo siento, perdio la materia con {promedio}")
+
+# Función para calcular número primos
+def numeros_primos():
+    num = int(input("Ingrese un número: "))
+    primos = []
+    for i in range(2, num+1):
+        es_primo = True
+        for j in range(2, int(i/2)+1):
+            if i % j == 0:
+                es_primo = False
+                break
+        if es_primo:
+            primos.append(i)
+    print("Los números primos de {} son: {}".format(num, primos))
+
+
+menu()
